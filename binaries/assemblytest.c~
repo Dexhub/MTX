@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+int no = 100, val ;
+printf("---The Program starts---");
+
+        asm ("movl %1, %%ebx;"
+             "movl %%ebx, %0;"
+             : "=r" ( val )        /* output */
+             : "r" ( no )         /* input */
+             : "%ebx"         /* clobbered register */
+         );
+printf("---------Program ends---");
+printf("\nVAL: %d",val);
+return 0;	
+}
+
+
