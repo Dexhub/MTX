@@ -2544,6 +2544,6 @@ let {{
 
 def format CdpData() {{
     decode_block = '''
-    return decodeCdpData(machInst);
+    return decodeVfpData(machInst);
     '''
 }};
