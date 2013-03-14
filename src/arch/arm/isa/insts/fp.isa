@@ -187,33 +187,6 @@ decodeVfpRegRegRegOp(ExtMachInst machInst, IntRegIndex dest,
 
 // -------CDP---------
 
-template <class Micro>
-class VfpMacroRegRegOp : public VfpMacroOp
-{
-  public:
-    VfpMacroRegRegOp(ExtMachInst _machInst, IntRegIndex _dest,
-                     IntRegIndex _op1, bool _wide) :
-        VfpMacroOp("VfpMacroRegRegOp", _machInst, No_OpClass, _wide)
-    {
-        numMicroops = machInst.fpscrLen + 1;
-        assert(numMicroops > 1);
-        microOps = new StaticInstPtr[numMicroops];
-        for (unsigned i = 0; i < numMicroops; i++) {
-            VfpMicroMode mode = VfpMicroop;
-            if (i == 0)
-                mode = VfpFirstMicroop;
-            else if (i == numMicroops - 1)
-                mode = VfpLastMicroop;
-            microOps[i] = new Micro(_machInst, _dest, _op1, mode);
-            nextIdxs(_dest, _op1);
-        }
-    }
-
-    %(BasicExecPanic)s
-};
-
-
-
 
 
 let {{
@@ -1673,9 +1646,7 @@ let {{
 }};
 
 
-
-
-
+//CDP - let block
 
 let {{
 
@@ -1683,34 +1654,28 @@ let {{
     decoder_output = ""
     exec_output = ""
 
-
-    vcvtSHFixedFpDCode = vfpEnabledCheckCode + '''
+    newInstCDPCode = vfpEnabledCheckCode + '''
         FPSCR fpscr = (FPSCR) FpscrExc;
-        uint64_t mid = ((uint64_t)FpOp1P0_uw | ((uint64_t)FpOp1P1_uw << 32));
+        double cOp1 = dbl(FpOp1P0_uw, FpOp1P1_uw);
+        vfpFlushToZero(fpscr, cOp1);
         VfpSavedState state = prepFpState(fpscr.rMode);
-        __asm__ __volatile__("" : "=m" (mid) : "m" (mid));
-        double cDest = vfpSFixedToFpD(fpscr.fz, fpscr.dn, mid, true, imm);
-        __asm__ __volatile__("" :: "m" (cDest));
+        __asm__ __volatile__("" : "=m" (cOp1) : "m" (cOp1));
+        uint64_t mid = vfpFpDToFixed(cOp1, false, false, imm);
+        __asm__ __volatile__("" :: "m" (mid));
         finishVfp(fpscr, state, fpscr.fz);
-        FpDestP0_uw = dblLow(cDest);
-        FpDestP1_uw = dblHi(cDest);
+        FpDestP0_uw = mid;
+        FpDestP1_uw = mid >> 32;
         FpscrExc = fpscr;
     '''
-    vcvtSHFixedFpDIop = InstObjParams("vcvt", "VcvtSHFixedFpD",
-                                      "FpRegRegImmOp",
-                                     { "code": vcvtSHFixedFpDCode,
+    newInstCDPIop = InstObjParams("cdp", "NewInstCDP", "CDPRegRegImmOp",
+                                     { "code": newInstCDPCode,
                                        "predicate_test": predicateTest,
                                        "op_class": "SimdFloatCvtOp" }, [])
-    header_output += FpRegRegImmOpDeclare.subst(vcvtSHFixedFpDIop);
-    decoder_output += FpRegRegImmOpConstructor.subst(vcvtSHFixedFpDIop);
-    exec_output += PredOpExecute.subst(vcvtSHFixedFpDIop);
+    header_output += FpRegRegImmOpDeclare.subst(newInstCDPIop);
+    decoder_output += FpRegRegImmOpConstructor.subst(newInstCDPIop);
+    exec_output += PredOpExecute.subst(newInstCDPIop);
 
 }};
-
-
-
-
-
 
 
 

@@ -2536,14 +2536,14 @@ let {{
             vn = (IntRegIndex)((bits(machInst, 7) << 5) |
                    (bits(machInst, 19, 16) << 1));
         }
-*/        
-        return new Unknown(machInst);
+  */      
+        return new NewInstCDP(machInst);
     }
     '''
 }};
 
 def format CdpData() {{
     decode_block = '''
-    return decodeVfpData(machInst);
+    return decodeCdpData(machInst);
     '''
 }};

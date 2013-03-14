@@ -81,7 +81,7 @@ decode BIGTHUMB {
                 0x2: decode LTOPCODE_4 {
                     0x0: decode LTCOPROC {
                         0xa, 0xb: VfpData::vfpData();
-                        default: VfpData::vfpData(); // cdp2-----NEW INSTRUCTION--------
+                        default: CdpData::cdpData(); // cdp2-----NEW INSTRUCTION--------
                     }
                     0x1: decode LTCOPROC {
                         0x1: M5ops::m5ops();
