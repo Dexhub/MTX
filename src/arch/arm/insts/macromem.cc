@@ -44,7 +44,6 @@
 
 #include "arch/arm/insts/macromem.hh"
 #include "arch/arm/generated/decoder.hh"
-
 using namespace std;
 using namespace ArmISAInst;
 

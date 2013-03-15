@@ -2497,7 +2497,7 @@ def format VfpData() {{
     return decodeVfpData(machInst);
     '''
 }};
-//----------------CDP implementation
+//----------------CDP Decode Code goes Here---------------------
 
 
 let {{
@@ -2505,39 +2505,40 @@ let {{
     StaticInstPtr
     decodeCdpData(ExtMachInst machInst);
     '''
-    decoder_output = '''
+    decoder_output += '''
     StaticInstPtr
     decodeCdpData(ExtMachInst machInst)
     {
-  
-/*      const uint32_t opc1 = bits(machInst, 23, 20);
-        const uint32_t opc2 = bits(machInst, 19, 16);
-        const uint32_t opc3 = bits(machInst, 7, 6);
-        //const uint32_t opc4 = bits(machInst, 3, 0);
-        // Used to select between vcmp and vcmpe.
-        const bool e = (bits(machInst, 7) == 1);
+//        const uint32_t opc1 = bits(machInst, 23, 20);
+//        const uint32_t opc2 = bits(machInst, 19, 16);
+//        const uint32_t opc3 = bits(machInst, 7, 6);
+//        const uint32_t opc4 = bits(machInst, 3, 0);
+//        // Used to select between vcmp and vcmpe.
+//        const bool e = (bits(machInst, 7) == 1);
 
-        const bool single = (bits(machInst, 8) == 0);
+//        const bool single = (bits(machInst, 8) == 0);
         IntRegIndex vd;
         IntRegIndex vm;
         IntRegIndex vn;
-        if (single) {
-            vd = (IntRegIndex)(bits(machInst, 22) |
-                    (bits(machInst, 15, 12) << 1));
-            vm = (IntRegIndex)(bits(machInst, 5) |
-                    (bits(machInst, 3, 0) << 1));
-            vn = (IntRegIndex)(bits(machInst, 7) |
-                    (bits(machInst, 19, 16) << 1));
-        } else {
+//        if (single) {
+//            vd = (IntRegIndex)(bits(machInst, 22) |
+//                    (bits(machInst, 15, 12) << 1));
+//            vm = (IntRegIndex)(bits(machInst, 5) |
+//                    (bits(machInst, 3, 0) << 1));
+//            vn = (IntRegIndex)(bits(machInst, 7) |
+//                    (bits(machInst, 19, 16) << 1));
+//        } else {
             vd = (IntRegIndex)((bits(machInst, 22) << 5) |
                     (bits(machInst, 15, 12) << 1));
             vm = (IntRegIndex)((bits(machInst, 5) << 5) |
                     (bits(machInst, 3, 0) << 1));
             vn = (IntRegIndex)((bits(machInst, 7) << 5) |
                    (bits(machInst, 19, 16) << 1));
-        }
-  */      
-        return new NewInstCDP(machInst);
+//        }
+
+//        return new Unknown(machInst);
+        
+        return new NewInstCDP(machInst,vd,vm,vn);
     }
     '''
 }};

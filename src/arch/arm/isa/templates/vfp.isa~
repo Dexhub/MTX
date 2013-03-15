@@ -38,7 +38,8 @@
 // Authors: Gabe Black
 
 let {{
-    newInstCDPCode = '''
+
+newInstCDPCode = '''
         if (!vfpEnabled(Cpacr, Cpsr, Fpexc))
             return disabledFault();
     '''
