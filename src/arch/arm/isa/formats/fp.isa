@@ -2519,7 +2519,7 @@ let {{
 //        const bool single = (bits(machInst, 8) == 0);
         IntRegIndex vd;
         IntRegIndex vm;
-        IntRegIndex vn;
+//        IntRegIndex vn;
 //        if (single) {
 //            vd = (IntRegIndex)(bits(machInst, 22) |
 //                    (bits(machInst, 15, 12) << 1));
@@ -2532,13 +2532,13 @@ let {{
                     (bits(machInst, 15, 12) << 1));
             vm = (IntRegIndex)((bits(machInst, 5) << 5) |
                     (bits(machInst, 3, 0) << 1));
-            vn = (IntRegIndex)((bits(machInst, 7) << 5) |
-                   (bits(machInst, 19, 16) << 1));
+//            vn = (IntRegIndex)((bits(machInst, 7) << 5) |
+//                   (bits(machInst, 19, 16) << 1));
 //        }
 
 //        return new Unknown(machInst);
         
-        return new NewInstCDP(machInst,vd,vm,vn);
+        return new NewInstCDP(machInst,vd,vm,VfpNotAMicroop);
     }
     '''
 }};
