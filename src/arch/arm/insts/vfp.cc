@@ -56,6 +56,22 @@ FpRegRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
     return ss.str();
 }
 
+
+//--New LRGRegOp
+std::string
+LRGRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
+{
+    std::stringstream ss;
+     
+    printMnemonic(ss);
+    printReg(ss, dest + FP_Base_DepTag);
+    ss << ", ";
+    printReg(ss, op1 + FP_Base_DepTag);
+    return ss.str();
+}
+
+
+
 std::string
 FpRegImmOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
 {
