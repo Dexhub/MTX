@@ -196,12 +196,20 @@ let {{
                                      { "code": newInstCDPCode,
                                        "predicate_test": predicateTest,
                                        "op_class": "SimdFloatCvtOp" }, [])
+
     header_output += LRGRegOpDeclare.subst(newInstCDPIop);
     decoder_output += LRGRegOpConstructor.subst(newInstCDPIop);
     exec_output += PredOpExecute.subst(newInstCDPIop);
 
+
     
 }};
+
+//    header_output += BasicDeclare.subst(newInstCDPIop);
+//    decoder_output += BasicConstructor.subst(newInstCDPIop);
+//    exec_output += PredOpExecute.subst(newInstCDPIop);
+
+
 // header_output += FpRegRegOpDeclare.subst(newInstCDPIop);
 // decoder_output += FpRegRegOpConstructor.subst(newInstCDPIop);
 // exec_output += PredOpExecute.subst(newInstCDPIop);
