@@ -192,6 +192,27 @@ let {{
     header_output = "//CDP header - LRG Code"
     decoder_output = "//CDP Decoder Output - LRG Code"
     exec_output = "//CDP Execution Code - LRG Code"
+
+    newInstCDPCode = '''
+//    SevMailbox = 1;
+    System *sys = xc->tcBase()->getSystemPtr();
+    for (int x = 0; x < sys->numContexts(); x++) {
+        ThreadContext *oc = sys->getThreadContext(x);
+//DPRINTF(MiscRegs, "--------MTXID CODE");
+oc->readMiscReg(MISCREG_MTXID);
+
+
+//        if (oc == xc->tcBase())
+//           continue;
+//        // Wake CPU with interrupt if they were sleeping
+//        if (oc->readMiscReg(MISCREG_SEV_MAILBOX) == 0) {
+//            // Post Interrupt and wake cpu if needed
+//            oc->getCpuPtr()->postInterrupt(INT_SEV, 0);
+//        }
+    }
+    '''
+
+
     newInstCDPIop = InstObjParams("cdp", "NewInstCDP", "LRGRegOp",
                                      { "code": newInstCDPCode,
                                        "predicate_test": predicateTest,

@@ -180,7 +180,7 @@ MiscReg
 ISA::readMiscRegNoEffect(int misc_reg)
 {
     assert(misc_reg < NumMiscRegs);
-	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect ");
+//	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect ");
 
 
     int flat_idx;
@@ -212,9 +212,9 @@ ISA::readMiscReg(int misc_reg, ThreadContext *tc)
         cpsr.t = pc.thumb() ? 1 : 0;
         return cpsr;
     }
-    if (misc_reg >= MISCREG_CP15_UNIMP_START)
-        panic("Unimplemented CP15 register %s read.\n",
-              miscRegName[misc_reg]);
+    //if (misc_reg >= MISCREG_CP15_UNIMP_START)
+    //    panic("Unimplemented CP15 register %s read.\n",
+    //          miscRegName[misc_reg]);
 
     switch (misc_reg) {
       case MISCREG_MPIDR:
