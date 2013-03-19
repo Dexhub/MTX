@@ -240,7 +240,10 @@ namespace ArmISA
         MISCREG_NOP = MISCREG_CP15_END,
         MISCREG_RAZ,
 
-        NUM_MISCREGS
+//---------LRG Code -MiscReg for MTX ID---- MISCREG_MTXID----
+ 	MISCREG_MTXID,
+//-----------------------------------------------------------
+	NUM_MISCREGS
     };
 
     MiscRegIndex decodeCP14Reg(unsigned crn, unsigned opc1,
@@ -322,7 +325,10 @@ namespace ArmISA
         "nsacr",
         "vbar", "mvbar", "isr", "fceidr", "l2latency",
         "crn15",
-        "nop", "raz"
+        "nop", "raz",
+	//---------LRG Code -MISCREGNAME for MISCREG_MTXID--"mtxid"--
+	"mtxid"
+	//----------------------------------------------------------
     };
 
     static_assert(sizeof(miscRegName) / sizeof(*miscRegName) == NUM_MISCREGS,
