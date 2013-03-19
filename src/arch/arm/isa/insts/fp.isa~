@@ -188,22 +188,43 @@ decodeVfpRegRegRegOp(ExtMachInst machInst, IntRegIndex dest,
 // -------CDP---------
 //CDP - Defining CDP instructions here
 
-
-
-
 let {{
-    header_output = ""
-    decoder_output = ""
-    exec_output = ""
-    newInstCDPIop = InstObjParams("cdp", "NewInstCDP", "FpRegRegOp",
+    header_output = "//LRG Code-------CDP header --------------"
+    decoder_output = "//LRG Code-------CDP Decoder Output -----"
+    exec_output = "//LRG Code-----------CDP Execution Code ----"
+    newInstCDPCode = '''
+
+
+//    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
+//     MiscReg val=mtxid;
+    System *sys = xc->tcBase()->getSystemPtr();
+    for (int x = 0; x < sys->numContexts(); x++) {
+        ThreadContext *oc = sys->getThreadContext(x);
+	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
+
+//	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
+//    }
+    '''
+
+
+    newInstCDPIop = InstObjParams("cdp", "NewInstCDP", "LRGRegOp",
                                      { "code": newInstCDPCode,
                                        "predicate_test": predicateTest,
                                        "op_class": "SimdFloatCvtOp" }, [])
-    header_output += FpRegRegImmOpDeclare.subst(newInstCDPIop);
-    decoder_output += FpRegRegImmOpConstructor.subst(newInstCDPIop);
-    exec_output += PredOpExecute.subst(newInstCDPIop);
 
+    header_output += LRGRegOpDeclare.subst(newInstCDPIop);
+    decoder_output += LRGRegOpConstructor.subst(newInstCDPIop);
+    exec_output += PredOpExecute.subst(newInstCDPIop);
 }};
+
+//    header_output += BasicDeclare.subst(newInstCDPIop);
+//    decoder_output += BasicConstructor.subst(newInstCDPIop);
+//    exec_output += PredOpExecute.subst(newInstCDPIop);
+
+
+// header_output += FpRegRegOpDeclare.subst(newInstCDPIop);
+// decoder_output += FpRegRegOpConstructor.subst(newInstCDPIop);
+// exec_output += PredOpExecute.subst(newInstCDPIop);
 
 
 //    vmsrIop = InstObjParams("cdp", "Vmsr", "FpRegRegOp",

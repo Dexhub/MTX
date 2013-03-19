@@ -189,15 +189,20 @@ decodeVfpRegRegRegOp(ExtMachInst machInst, IntRegIndex dest,
 //CDP - Defining CDP instructions here
 
 let {{
-    header_output = "//CDP header - LRG Code"
-    decoder_output = "//CDP Decoder Output - LRG Code"
-    exec_output = "//CDP Execution Code - LRG Code"
-
+    header_output = "//LRG Code-------CDP header --------------"
+    decoder_output = "//LRG Code-------CDP Decoder Output -----"
+    exec_output = "//LRG Code-----------CDP Execution Code ----"
     newInstCDPCode = '''
+
+
+//    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
+//     MiscReg val=mtxid;
     System *sys = xc->tcBase()->getSystemPtr();
     for (int x = 0; x < sys->numContexts(); x++) {
         ThreadContext *oc = sys->getThreadContext(x);
-	oc->readMiscReg(MISCREG_MTXID);
+	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
+
+//	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
     }
     '''
 

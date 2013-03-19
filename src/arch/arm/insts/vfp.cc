@@ -70,6 +70,13 @@ LRGRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
     return ss.str();
 }
 
+//  Replace the below code with the above code
+//    std::stringstream ss;
+//    printMnemonic(ss);
+//    printReg(ss, dest + FP_Base_DepTag);
+//    ccprintf(ss, ", #%d", imm);
+//    return ss.str();
+
 
 
 std::string

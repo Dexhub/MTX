@@ -212,6 +212,7 @@ ISA::readMiscReg(int misc_reg, ThreadContext *tc)
         cpsr.t = pc.thumb() ? 1 : 0;
         return cpsr;
     }
+
     //if (misc_reg >= MISCREG_CP15_UNIMP_START)
     //    panic("Unimplemented CP15 register %s read.\n",
     //          miscRegName[misc_reg]);
