@@ -200,9 +200,8 @@ let {{
     System *sys = xc->tcBase()->getSystemPtr();
     for (int x = 0; x < sys->numContexts(); x++) {
         ThreadContext *oc = sys->getThreadContext(x);
-	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
+	oc->setMiscRegNoEffect(MISCREG_MTXID, 170);
 
-//	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
     }
     '''
 
@@ -216,6 +215,11 @@ let {{
     decoder_output += LRGRegOpConstructor.subst(newInstCDPIop);
     exec_output += PredOpExecute.subst(newInstCDPIop);
 }};
+
+
+//	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
+
+//	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
 
 //    header_output += BasicDeclare.subst(newInstCDPIop);
 //    decoder_output += BasicConstructor.subst(newInstCDPIop);

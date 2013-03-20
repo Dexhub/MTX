@@ -1,0 +1,31 @@
+# Ignore the temporary files created by gedit
+*~
+
+GEM5 stock/
+binaries/CDP - New binary/
+binaries/dump.out
+build/
+configs/common/Benchmarks.pyc
+configs/common/CacheConfig.pyc
+configs/common/Caches.pyc
+configs/common/CpuConfig.pyc
+configs/common/O3_ARM_v7a.pyc
+configs/common/Options.pyc
+configs/common/Simulation.pyc
+configs/common/SysPaths.pyc
+configs/common/cpu2000.pyc
+configs/ruby/Ruby.pyc
+ext/ply/ply/*
+m5out/
+parser.out
+parsetab.py
+src/mem/slicc/*.pyc
+src/mem/slicc/ast/*.pyc
+src/mem/slicc/generate/html.pyc
+src/mem/slicc/*.pyc
+src/mem/slicc/symbols/*.pyc
+src/python/m5/*.pyc
+src/python/m5/util/*.pyc
+src/mem/slicc/generate/__init__.pyc
+src/python/m5/internal/__init__.pyc
+
