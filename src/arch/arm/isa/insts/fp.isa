@@ -213,7 +213,7 @@ let {{
 //    MiscReg val=mtxid;
 
 
-    const uint32_t opc1 = bits(machInst,19,12);
+    const uint32_t opc1 = bits(machInst,15,8);
      
 
 
