@@ -213,16 +213,27 @@ let {{
 //    MiscReg val=mtxid;
 
 
-    const uint32_t opc1 = bits(machInst,15,8);
-     
+        const uint32_t opc1 = bits(machInst,19,12);
 
-
-    System *sys = xc->tcBase()->getSystemPtr();
-    for (int x = 0; x < sys->numContexts();x++) {
-        ThreadContext *oc = sys->getThreadContext(x);
-	oc->setMiscRegNoEffect(MISCREG_MTXID,opc1);
+//Code to verify what hs been written
+	const uint32_t test = bits(machInst,0);  
+	if(test == 0)
+	{
+    		System *sys = xc->tcBase()->getSystemPtr();
+		for (int x = 0; x < sys->numContexts();x++) {
+        	ThreadContext *oc = sys->getThreadContext(x);
+		oc->readMiscRegNoEffect(MISCREG_MTXID);
+		}
+	}
+	else
+	{
+	    	System *sys = xc->tcBase()->getSystemPtr();
+		for (int x = 0; x < sys->numContexts();x++) {
+	        ThreadContext *oc = sys->getThreadContext(x);
+		oc->setMiscRegNoEffect(MISCREG_MTXID,opc1);
 //	oc->setMiscRegNoEffect(MISCREG_MTXID, 100);
-    }
+		}
+   	 }
     '''
 
 
