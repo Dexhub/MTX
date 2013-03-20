@@ -194,14 +194,34 @@ let {{
     exec_output = "//LRG Code-----------CDP Execution Code ----"
     newInstCDPCode = '''
 
+//uint32_t temp = bits(machInst, 31, 28);
+//const uint32_t opc0 = bits(machInst, 31, 28);
+//const uint32_t opc1 = bits(machInst, 27, 24);
+//const uint32_t opc2 = bits(machInst, 23, 20);
+//const uint32_t opc3 = bits(machInst, 19, 16);
+//const uint32_t opc4 = bits(machInst, 15, 12);
+//const uint32_t opc5 = bits(machInst, 11, 8);
+//const uint32_t opc6 = bits(machInst, 7, 5);
+//const uint32_t opc7 = bits(machInst, 4);
+//const uint32_t opc8 = bits(machInst, 3, 0);
+//
+//temp=opc0+opc1+opc2+opc3+opc4+opc5+opc6+opc7+opc8;
+//
+
 
 //    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
-//     MiscReg val=mtxid;
-    System *sys = xc->tcBase()->getSystemPtr();
-    for (int x = 0; x < sys->numContexts(); x++) {
-        ThreadContext *oc = sys->getThreadContext(x);
-	oc->setMiscRegNoEffect(MISCREG_MTXID, 170);
+//    MiscReg val=mtxid;
 
+
+    const uint32_t opc1 = bits(machInst,19,12);
+     
+
+
+    System *sys = xc->tcBase()->getSystemPtr();
+    for (int x = 0; x < sys->numContexts();x++) {
+        ThreadContext *oc = sys->getThreadContext(x);
+	oc->setMiscRegNoEffect(MISCREG_MTXID,opc1);
+//	oc->setMiscRegNoEffect(MISCREG_MTXID, 100);
     }
     '''
 

@@ -28,4 +28,4 @@ src/python/m5/*.pyc
 src/python/m5/util/*.pyc
 src/mem/slicc/generate/__init__.pyc
 src/python/m5/internal/__init__.pyc
-
+*.swp

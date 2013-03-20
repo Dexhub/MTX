@@ -194,7 +194,7 @@ ISA::readMiscRegNoEffect(int misc_reg)
             misc_reg, flat_idx, val);
  //---------LRG Code -Check if readMiscRegNoEffect called for MISCREG_MTXID----
     if(misc_reg== MISCREG_MTXID)
-	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect ");
+	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect\n ");
 
    return val;
 }
