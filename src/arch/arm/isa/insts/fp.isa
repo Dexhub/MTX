@@ -185,8 +185,8 @@ decodeVfpRegRegRegOp(ExtMachInst machInst, IntRegIndex dest,
 }
 }};
 
-// -------CDP---------
-//CDP - Defining CDP instructions here
+//LRG Code-----------CDP---------
+//CDP - Defining CDP instruction here
 
 let {{
     header_output = "//LRG Code-------CDP header --------------"
@@ -194,26 +194,18 @@ let {{
     exec_output = "//LRG Code-----------CDP Execution Code ----"
     newInstCDPCode = '''
 
-//uint32_t temp = bits(machInst, 31, 28);
-//const uint32_t opc0 = bits(machInst, 31, 28);
-//const uint32_t opc1 = bits(machInst, 27, 24);
-//const uint32_t opc2 = bits(machInst, 23, 20);
-//const uint32_t opc3 = bits(machInst, 19, 16);
-//const uint32_t opc4 = bits(machInst, 15, 12);
-//const uint32_t opc5 = bits(machInst, 11, 8);
-//const uint32_t opc6 = bits(machInst, 7, 5);
-//const uint32_t opc7 = bits(machInst, 4);
-//const uint32_t opc8 = bits(machInst, 3, 0);
-//
-//temp=opc0+opc1+opc2+opc3+opc4+opc5+opc6+opc7+opc8;
-//
+									//*****    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
 
+//Bits 12 to 15 indicate the general purpose register from which the MTXID value is to be read.
 
-//    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
-//    MiscReg val=mtxid;
-
-
-        const uint32_t opc1 = bits(machInst,19,12);
+       IntRegIndex rd = (IntRegIndex)(uint32_t)bits(machInst, 15, 12);
+									//*****	Previous Code- const uint32_t opc1 = bits(machInst,19,12);
+   	MiscReg val;	
+		System *sys = xc->tcBase()->getSystemPtr();
+		for (int x = 0; x < sys->numContexts();x++) {
+        	ThreadContext *oc = sys->getThreadContext(x);
+	        val = oc->readIntReg(rd);
+		}
 
 //Code to verify what hs been written
 	const uint32_t test = bits(machInst,0);  
@@ -230,10 +222,12 @@ let {{
 	    	System *sys = xc->tcBase()->getSystemPtr();
 		for (int x = 0; x < sys->numContexts();x++) {
 	        ThreadContext *oc = sys->getThreadContext(x);
-		oc->setMiscRegNoEffect(MISCREG_MTXID,opc1);
-//	oc->setMiscRegNoEffect(MISCREG_MTXID, 100);
+		oc->setMiscRegNoEffect(MISCREG_MTXID,val);
+		oc->readMiscRegNoEffect(MISCREG_MTXID);
+		oc->readMiscRegNoEffect(MISCREG_MTXID);
 		}
    	 }
+
     '''
 
 
@@ -248,7 +242,7 @@ let {{
 }};
 
 
-//	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
+								//	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
 
 //	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
 

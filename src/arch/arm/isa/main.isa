@@ -73,3 +73,6 @@ namespace ArmISA;
 
 //Include the decoder definition
 ##include "decoder/decoder.isa"
+
+//LRG Code --
+//##include "cpu/cdpu_thread_context.hh"

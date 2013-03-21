@@ -181,8 +181,6 @@ ISA::readMiscRegNoEffect(int misc_reg)
 {
     assert(misc_reg < NumMiscRegs);
 //	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect ");
-
-
     int flat_idx;
     if (misc_reg == MISCREG_SPSR)
         flat_idx = flattenMiscIndex(misc_reg);
@@ -194,8 +192,7 @@ ISA::readMiscRegNoEffect(int misc_reg)
             misc_reg, flat_idx, val);
  //---------LRG Code -Check if readMiscRegNoEffect called for MISCREG_MTXID----
     if(misc_reg== MISCREG_MTXID)
-	DPRINTF(MiscRegs, "\n\n\n\n\n\n-------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegNoEffect\n ");
-
+	DPRINTF(MiscRegs, "\n-------------MISCREG_MTXID---readMiscRegNoEffect---\n ");
    return val;
 }
 
@@ -300,7 +297,7 @@ ISA::readMiscReg(int misc_reg, ThreadContext *tc)
         return 0;
       case MISCREG_MTXID:
 	//---------LRG Code -Check if readMiscRegNoEffect called for MISCREG_MTXID----
-	DPRINTF(MiscRegs, "\n\n\n\n\n\n--------------MISCREG_MTXID---------\n\n\n\n\n readMiscRegswitch case ");
+	DPRINTF(MiscRegs, "\n--------------MISCREG_MTXID--readMiscRegswitch case---\n");
 	return 0;
     }
     return readMiscRegNoEffect(misc_reg);
@@ -322,7 +319,7 @@ ISA::setMiscRegNoEffect(int misc_reg, const MiscReg &val)
             flat_idx, val);
 //---------LRG Code -Check if setMiscRegNoEffect called for MISCREG_MTXID----
     if(misc_reg== MISCREG_MTXID)
-	DPRINTF(MiscRegs, "\n\n\n\n\n\n--------------MISCREG_MTXID---------\n\n\n\n\n setMiscRegNoEffect");
+	DPRINTF(MiscRegs, "\n--------------MISCREG_MTXID------setMiscRegNoEffect--\n");
 
 
 }
@@ -675,7 +672,7 @@ ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
                  miscRegName[misc_reg], uint32_t(val));
 	  case MISCREG_MTXID:
 		//---------LRG Code -Check if setMiscReg called for MISCREG_MTXID----
-    		DPRINTF(MiscRegs, "\n\n\n\n\n\n--------------MISCREG_MTXID---------\n\n\n\n\n setMiscReg");
+    		DPRINTF(MiscRegs, "\n--------------MISCREG_MTXID----- setMiscReg--\n");
 		break;
         }
     }

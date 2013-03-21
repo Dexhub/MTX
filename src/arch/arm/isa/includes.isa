@@ -60,6 +60,8 @@ output header {{
 #include "arch/arm/isa_traits.hh"
 #include "mem/packet.hh"
 #include "sim/faults.hh"
+//LRG Code --Include thread context
+#include "cpu/thread_context.hh"
 }};
 
 output decoder {{
@@ -78,6 +80,8 @@ using namespace ArmISA;
 output exec {{
 #include <cmath>
 
+//LRG Code --------Include thread context
+#include "cpu/thread_context.hh"
 #include "arch/arm/faults.hh"
 #include "arch/arm/isa_traits.hh"
 #include "arch/arm/utility.hh"
