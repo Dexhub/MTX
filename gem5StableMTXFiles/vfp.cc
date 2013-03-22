@@ -56,17 +56,13 @@ FpRegRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
     return ss.str();
 }
 
-//--New LRGRegOp ----This is used just to print out the assembly code - no other real significance.
+//LRG Code--New LRGRegOp ----This is used just to print out the assembly code - no other real significance.
 std::string
 LRGRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
 {
     std::stringstream ss;
-//    ss<<"LRG"; change the mnemonic from cdp to LRG
+    ss<<"LRG"; 		//change the mnemonic from cdp to LRG
     printMnemonic(ss);
-//    printReg(ss, dest + FP_Base_DepTag);
-
- //   return ss.str();
-
     printReg(ss, dest + FP_Base_DepTag);
     ss << ", ";
     printReg(ss, op1 + FP_Base_DepTag);

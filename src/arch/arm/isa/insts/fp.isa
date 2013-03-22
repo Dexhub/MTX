@@ -1749,6 +1749,3 @@ let {{
     decoder_output += FpRegRegImmOpConstructor.subst(vcvtUHFixedFpDIop);
     exec_output += PredOpExecute.subst(vcvtUHFixedFpDIop);
 }};
-
-
-

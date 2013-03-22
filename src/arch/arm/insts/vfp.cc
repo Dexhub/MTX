@@ -56,7 +56,6 @@ FpRegRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const
     return ss.str();
 }
 
-
 //--New LRGRegOp ----This is used just to print out the assembly code - no other real significance.
 std::string
 LRGRegOp::generateDisassembly(Addr pc, const SymbolTable *symtab) const

@@ -194,13 +194,13 @@ let {{
     exec_output = "//LRG Code-----------CDP Execution Code ----"
     newInstCDPCode = '''
 
-									//*****    const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
+//--- const MiscReg *val = (MiscReg)bits(machInst, 19, 16);
 
 //Bits 12 to 15 indicate the general purpose register from which the MTXID value is to be read.
 
        IntRegIndex rd = (IntRegIndex)(uint32_t)bits(machInst, 15, 12);
-									//*****	Previous Code- const uint32_t opc1 = bits(machInst,19,12);
-   	MiscReg val;	
+//--- const uint32_t opc1 = bits(machInst,19,12);
+ 	MiscReg val;	
 		System *sys = xc->tcBase()->getSystemPtr();
 		for (int x = 0; x < sys->numContexts();x++) {
         	ThreadContext *oc = sys->getThreadContext(x);
@@ -241,58 +241,6 @@ let {{
     exec_output += PredOpExecute.subst(newInstCDPIop);
 }};
 
-
-								//	oc->setMiscRegNoEffect(MISCREG_MTXID, oc->readMiscRegNoEffect(137));
-
-//	ISA::setMiscReg(int misc_reg, const MiscReg &val, ThreadContext *tc)
-
-//    header_output += BasicDeclare.subst(newInstCDPIop);
-//    decoder_output += BasicConstructor.subst(newInstCDPIop);
-//    exec_output += PredOpExecute.subst(newInstCDPIop);
-
-
-// header_output += FpRegRegOpDeclare.subst(newInstCDPIop);
-// decoder_output += FpRegRegOpConstructor.subst(newInstCDPIop);
-// exec_output += PredOpExecute.subst(newInstCDPIop);
-
-
-//    vmsrIop = InstObjParams("cdp", "Vmsr", "FpRegRegOp",
-//                            { "code": vmsrEnabledCheckCode + \
-//                                      "MiscDest = Op1;",
-//                              "predicate_test": predicateTest,
-//                              "op_class": "SimdFloatMiscOp" },
-//                             ["IsSerializeAfter","IsNonSpeculative"])
-//    header_output += FpRegRegOpDeclare.subst(vmsrIop);
-//    decoder_output += FpRegRegOpConstructor.subst(vmsrIop);
-//    exec_output += PredOpExecute.subst(vmsrIop);
-
-//    newInstDCode = ""
-
-//    vmovRegDIop = InstObjParams("vmov", "VmovRegD", "FpRegRegOp",
-//                                { "code": newInstDCode,
-//                                  "predicate_test": predicateTest,
-//                                  "op_class": "SimdFloatMiscOp" }, [])
-//
-//        FPSCR fpscr = (FPSCR) FpscrExc;
-//        double cOp1 = dbl(FpOp1P0_uw, FpOp1P1_uw);
-//        vfpFlushToZero(fpscr, cOp1);
-//        VfpSavedState state = prepFpState(fpscr.rMode);
-//        __asm__ __volatile__("" : "=m" (cOp1) : "m" (cOp1));
-//        uint64_t mid = vfpFpDToFixed(cOp1, false, false, imm);
-//        __asm__ __volatile__("" :: "m" (mid));
-//        finishVfp(fpscr, state, fpscr.fz);
-//        FpDestP0_uw = mid;
-//        FpDestP1_uw = mid >> 32;
-//        FpscrExc = fpscr;
-//    '''
- 
-//  newInstCDPIop = InstObjParams("cdp", "NewInstCDP", "FpRegRegOp",
-//                                     { "code": newInstCDPCode,
-//                                       "predicate_test": predicateTest,
-//                                       "op_class": "SimdFloatCvtOp" }, [])
-//    header_output += FpRegRegImmOpDeclare.subst(newInstCDPIop);
-//    decoder_output += FpRegRegImmOpConstructor.subst(newInstCDPIop);
-//    exec_output += PredOpExecute.subst(newInstCDPIop);
 
 let {{
 

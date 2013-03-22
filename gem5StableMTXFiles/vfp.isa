@@ -72,7 +72,7 @@ let {{
                 return disabledFault();
     '''
 }};
-//---------------------------LRG Code-------------------------
+//LRG Code--------Template definition for LRGRegOp-------------------------
 def template LRGRegOpDeclare {{
 class %(class_name)s : public %(base_class)s
 {

@@ -2505,7 +2505,7 @@ def format VfpData() {{
     return decodeVfpData(machInst);
     '''
 }};
-//----------------CDP Decode Code goes Here---------------------
+//LRG Code -----CDP Decode Code---------------------
 
 
 let {{
